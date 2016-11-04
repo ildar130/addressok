@@ -1,0 +1,8 @@
+#!/bin/bash
+mkdir ./bak
+docker network create --driver bridge addressoknetwork
+docker run --name addressokdata -h addressokdata \
+    -v /var/lib/mysql \
+    -v /data \
+    --network=addressoknetwork \
+    -ti -d ubuntu:14.04.1 /bin/bash

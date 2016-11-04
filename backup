@@ -1,0 +1,3 @@
+#!/bin/bash
+docker run --volumes-from addressokdata --name addressok-migrate -h addressok-migrate -v $(pwd)/bak:/backup ubuntu tar -cvf /backup/var_lib_mysql.tar.gz /var/lib/mysql
+docker rm -v addressok-migrate

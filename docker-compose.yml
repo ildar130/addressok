@@ -1,0 +1,50 @@
+version: '2'
+services:
+    addressok_mysql:
+        image: mariadb:10.1.18
+        container_name: addressok_mysql
+        # mem_limit: 500000000
+        # memswap_limit: 1000000000
+        external_links:
+            - addressokdata:dvc
+        volumes_from:
+            - container:addressokdata
+        expose:
+            - "3306"
+        # Uncomment, if you want to connect to your MySQL server directly
+        # from outside Docker
+        # ports:
+        #     - "23306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=ds3M3d9M
+            - MYSQL_DATABASE=addressok
+            - MYSQL_USER=addressok
+            - MYSQL_PASSWORD=sam8i2su
+            - COMPOSE_PROJECT_NAME=AddressOK
+        command: [mysqld, --character-set-server=utf8, --collation-server=utf8_general_ci]
+        networks:
+            - addressoknetwork
+    addressok:
+        build: build_addressok_app
+        container_name: addressok
+        expose:
+            - "14000"
+        # Uncomment, if you want to connect to the AddressOK service
+        # from outside Docker
+        ports:
+            - "14000:14000"
+        volumes_from:
+            - container:addressokdata
+        volumes:
+            - ./logs:/logs
+            - ./app:/app
+        links:
+            - addressok_mysql:mysql
+        stdin_open: true
+        tty: true
+        networks:
+            - addressoknetwork
+networks:
+    addressoknetwork:
+        external:
+            name: addressoknetwork

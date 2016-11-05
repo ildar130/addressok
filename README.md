@@ -13,4 +13,4 @@ AddressOK представляет собой web-сервис, работающ
 
 ## Документация
 
-Документация появится очень скоро!
+[http://addressok.readthedocs.io/ru/latest/](http://addressok.readthedocs.io/ru/latest/)

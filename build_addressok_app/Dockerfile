@@ -21,6 +21,7 @@ RUN echo "alias python='python3'" >> /root/.bashrc
 RUN echo "alias pip='pip3'" >> /root/.bashrc
 
 RUN pip3 install flask==0.10.1
+RUN pip3 install --upgrade pip
 RUN pip3 install PyMySQL\
 	&& pip3 install uwsgi
 
